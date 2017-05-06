@@ -21,3 +21,4 @@ sync/SSLIMS Client-cache
 sync/AnyCPU_DebugSetupFiles
 sync/AnyCPU_ReleaseSetupFiles
 SSLIMS Client.aip
+.vagrant
