@@ -1,0 +1,57 @@
+<div class="ui-popup-wrapper">
+	<div class="ui-popup-vcenter">
+		<div class="ui-popup edit-sample-config popup-reset">
+			<a href="javascript:void(0);" class="ui-popup-close glyphicon glyphicon-remove"></a>
+			
+			<h2>Edit Sample Configuration</h2>
+
+			<table style="style:width:100%;">
+				<tr>
+					<td>
+						<label>Result Group:</label>
+					</td>
+					<td>
+						<%- tableConfig.get('result_group') %>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Instrument Protocol:</label>
+					</td>
+					<td>
+						<%- tableConfig.get('instrument_protocol') %>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Analysis Protocol:</label>
+					</td>
+					<td>
+						<%- tableConfig.get('analysis_protocol') %>
+					</td>
+				</tr>
+			</table>
+			<br />
+
+
+			<table style="width:100%;">
+				<tr>
+					<td>
+						<select id="config-id" style="width:100%;">
+							<% configs.each(function(config) { 
+								var isSelected = (tableConfig.get('id') == config.get('id'));
+								%>
+								<option <%= isSelected ? "selected " : "" %>value="<%= config.get('id') %>"><%= config.get('alias') %><%= (globalConfig.get('id') == config.get('id')) ? " (Sheet Default)" : "" %></option>
+							<% }) %>
+						</select>
+					</td>
+					<td style="width:1%;">
+						<input type="button" class="btn btn-green save-sample-config-btn" style="margin-left:10px;margin-top:2px;" value="Save" />
+					</td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
+</div>
+

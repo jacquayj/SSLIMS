@@ -1,0 +1,7 @@
+.popup-report select, .popup-report textarea {
+	margin-bottom: 15px;
+}
+
+.popup-report label {
+	font-weight: 600;
+}

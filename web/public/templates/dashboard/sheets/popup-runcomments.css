@@ -1,0 +1,23 @@
+.popup-runcomments input[type="text"], .popup-runcomments select {
+	width: 49%;
+}
+
+.popup-runcomments td {
+	vertical-align: middle;
+	padding-bottom: 13px;
+}
+
+.popup-runcomments {
+	width: 700px !important;
+}
+
+.t-center {
+	text-align: center;
+}
+
+.del-run {
+	color: #f35e5e;
+    font-size: 18px;
+    cursor: pointer;
+    margin-right: 20px;
+}

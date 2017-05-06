@@ -1,0 +1,53 @@
+<form>
+	<% _.each(sortSamples, function(sample) {
+		_.each(sample.runs, function(run) {
+
+			var wellName = sample.wellName;
+		%>
+		<h3>Sample <%- sample.get('name') %> - <%= wellName %> - <%= (new Date(run.get('created_at'))).toLocaleString() %> - <a href="#samples/<%= sample.get('id') %>/runs/<%= run.get('id') %>">View Run</a></h3>
+		<table>
+			<tbody>
+			<% if ( run.get('comments').length == 0 ) { %>
+				<tr>
+					<td colspan="2">
+						No comments posted yet
+						<br /><br />
+					</td>
+				</tr>
+			<% } else {
+					var copy = run.get('comments').clone();
+					var comments = [], size = 2;
+					while ( copy.length > 0 ) comments.push(copy.splice(0, size)); 
+
+					_.each(comments, function(set) { %>
+						<tr>
+							<% _.each(set, function(comment) { %>
+								<td>
+									<div class="ui-comment">
+										<a href="#staff/<%= comment.user.get('id') %>"><img class="ui-comment-picture" src="<%= comment.user.getGravitarURL() %>">
+										<span class="ui-comment-name"><%- comment.user.get('first_name') %> <%- comment.user.get('last_name') %></span></a>
+										<span class="ui-comment-age" title="<%=  (new Date(comment.created_at)).toLocaleString() %>"><%=  (new Date(comment.created_at)).timeSince() %> ago</span>
+										<% if ( SSLIMS.user.get('user_type') == 'admin' ) { %>
+											<span class="ui-comment-delete" data-id="<%= comment.id %>">Delete</span>
+										<% } %>
+										<p><%- comment.message %></p>
+									</div>
+								</td>
+								<% if ( set.length == 1 ) { %>
+									<td></td>
+								<% } %>
+							<% }); %>
+						</tr>
+					<% }); 
+				} %>
+			<% if ( SSLIMS.user.get('user_type') != 'customer' ) { %>
+			<tr>
+				<td colspan="2">
+					<input type="button" class="btn-green add-comments" value="Add Comments">
+				</td>
+			</tr>
+			<% } %>
+		</tbody></table>
+
+	<% }); }); %>
+</form>

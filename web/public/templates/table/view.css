@@ -1,0 +1,152 @@
+
+.table-container {
+	/*overflow: scroll;*/
+	overflow-y: hidden;
+	margin-bottom: 12px;
+}
+
+.ui-table-highlight td {
+	background-color: #d1ece5 !important;
+}
+
+.ui-table th {
+	background-color: #4d4c50;
+	border-top: 1px solid #969597;
+	line-height: 50px;
+	color: #e5e6e6;
+	font-size: 15px;
+	font-weight: normal;
+	text-align: left;
+}
+
+.ui-table-input {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.ui-table tr .ui-table-no-result {
+	text-align: center;
+	font-size: 15px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.ui-table-item-view {
+	font-weight: bold;
+	font-size: 18px;
+	text-decoration: none;
+}
+
+.ui-tab-content .ui-table {
+	margin-bottom: 0;
+}
+
+.ui-table th {
+	color: #e5e6e6;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.ui-table th .glyphicon {
+	font-size: 11px;
+	vertical-align: text-top;
+}
+
+.ui-table th:first-child {
+	-webkit-border-top-left-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	border-top-left-radius: 3px;
+	border-left: 1px solid #969597;
+}
+
+.ui-table th:last-child {
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-right-radius: 3px;
+	border-right: 1px solid #969597;
+}
+
+
+.ui-table td {
+	background-color: #fafafb;
+	border: 1px solid #d1d2d4;
+	border-top: none;
+	border-left: none;
+	line-height: 45px;
+}
+
+.ui-table td:first-child {
+	border-left: 1px solid #d1d2d4;
+}
+
+.ui-table th, .ui-table td {
+	padding-left: 10px;
+	padding-right: 10px;
+	white-space: nowrap;
+}
+
+.ui-table tfoot td:first-child {
+	-webkit-border-bottom-left-radius: 3px;
+	-moz-border-radius-bottomleft: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+.ui-table th span.glyphicon {
+	margin-left: 5px;
+}
+
+.ui-table tfoot td:last-child {
+	-webkit-border-bottom-right-radius: 3px;
+	-moz-border-radius-bottomright: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+.ui-table tfoot td {
+	background-color: #f1f1f2;
+}
+
+.ui-table tfoot input[type=text] {
+	height: 28px !important;
+	width: 150px;
+}
+
+.ui-pagination {
+	height: 45px;
+}
+
+.ui-pagination span {
+	padding: 9px;
+	display: inline-block;
+	border: 1px solid #e5e5e7;
+	background-color: #fafafb;
+
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+
+	line-height: 12px;
+
+	cursor: pointer;
+
+	margin-right: 2px;
+	margin-left: 2px;
+}
+
+.ui-pagination div {
+	cursor: pointer;
+}
+
+.ui-pagination .glyphicon {
+	color: #d1d2d5;
+}
+
+.ui-pagination span {
+	text-decoration: none;
+	color: #79797d;
+}
+
+.ui-pagination .selected {
+	color: #1bd3a4;
+	border-color: #1bd3a4;
+	height: auto !important;
+}

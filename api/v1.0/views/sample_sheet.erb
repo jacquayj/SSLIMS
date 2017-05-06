@@ -1,0 +1,17 @@
+Container Name	Plate ID	Description	Application	Application Instance	ContainerType	Owner	Operator	PlateSealing	SchedulingPref						
+<%= sheet['name'].gsub(/[^a-zA-Z0-9-]/, '-').gsub(/-+/, '-') %>	<%= record.id2 %>	<%= sheet['id'] %>	<%= sheet['instrument']['application'] %>		96-Well	UF/ICBR	<%= sheet['user']['last_name'] %>,<%= sheet['user']['first_name'] %>	<%= sheet['instrument']['plate_sealing'] %>	1234						
+Well	Sample Name	Comment	Results Group	Instrument Protocol 1	Analysis Protocol 1	Instrument Protocol 2	Analysis Protocol 2	Instrument Protocol 3	Analysis Protocol 3	Instrument Protocol 4	Analysis Protocol 4	Instrument Protocol 5	Analysis Protocol 5<% sheet['wells'].each do |well, sample_with_config| 
+	sample = sample_with_config[:sample]
+	config = sample_with_config[:config]
+
+	if config.nil?
+		result_group = sheet['instrument']['result_group']
+		instrument_protocol = sheet['instrument']['instrument_protocol']
+		analysis_protocol = sheet['instrument']['analysis_protocol']
+	else
+		result_group = config.result_group
+		instrument_protocol = config.instrument_protocol
+		analysis_protocol = config.analysis_protocol
+	end
+	%>
+<%= well %>	<%= sample.request.user.last_name.downcase.strip.gsub(/\s+/, "-") %>-<%= sample.name %>-<%= sample.primer.name.strip.gsub(/\s+/, "-") %>	<%= well %> <%= sample.request.user.last_name.downcase.strip.gsub(/\s+/, "-") %>,<%= sample.request.user.first_name.downcase.strip.gsub(/\s+/, "-") %> <%= sample.id %> <%= sheet['id'] %>	<%= result_group %>	<%= instrument_protocol %>	<%= analysis_protocol %>									<% end %>

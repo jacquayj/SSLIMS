@@ -1,0 +1,87 @@
+<div class="box">
+
+	<h2>Instrument Configuration Profiles</h2>
+
+	<div class="ui-tab-group">
+
+		<ul class="ui-tabs">
+			<% instruments.each(function(model) { %>
+				<li><a href="#config/instrument/<%= model.get('id') %>"><%- model.get('alias') %></a></li>
+			<% }); %>
+			<!--<li><a href="#" class="glyphicon glyphicon-plus"></a></li>-->
+			<div class="clear"></div>
+		</ul>
+
+		<% instruments.each(function(model) { %>
+			<div class="ui-tab-content">
+				<h2>Profile: <%- model.get('alias') %></h2>
+				<img src="<%= model.getPhotoURL() %>" class="left" style="width: 46%;margin-top: 33px;margin-right: 4%;">
+				
+				<form>
+					<table style="width:50%;">
+						<tbody>
+						<tr>
+							<td>
+								<h3 style="margin-bottom:0;">Global Sheet Configuration</h3>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>Alias</label>
+								<input type="text" class="instrument-alias" value="<%- model.get('alias') %>">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>Application</label>
+								<input type="text" class="instrument-application" value="<%- model.get('application') %>">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>Plate Sealing</label>
+								<input type="text" class="instrument-plate" value="<%- model.get('plate_sealing') %>">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h3 style="margin-top:15px;margin-bottom:0;">Sample Specific Configuration</h3>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>Result Group</label>
+								<input type="text" class="instrument-result" value="<%- model.get('result_group') %>">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>Instrument Protocol</label>
+								<input type="text" class="instrument-protocol" value="<%- model.get('instrument_protocol') %>">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>Analysis Protocol</label>
+								<input type="text" class="instrument-analysis" value="<%- model.get('analysis_protocol') %>">
+							</td>
+						</tr>
+
+					</tbody></table>
+					<input type="hidden" class="instrument-id" value="<%= model.get('id') %>">
+					<input type="button" class="btn-red delete-instrument" value="Delete">
+					<input type="submit" class="right" value="Save Settings">
+				</form>
+
+				<div class="clear"></div>
+			</div>
+		<% }); %>
+
+	</div>
+	<input type="button" class="btn-green create-instrument" value="Create Configuration" style="margin-top: 12px;">
+</div>
+<div class="box">
+	<div id="control-samples"></div>
+	<br /><br />
+	<div id="primers"></div>
+</div>

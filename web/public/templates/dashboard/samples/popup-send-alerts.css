@@ -1,0 +1,22 @@
+
+.popup-send-alerts .box {
+	float: none;
+	width: 100%;
+	padding-right: 0px;
+	margin-bottom: 0px;
+}
+
+.popup-send-alerts .ui-tab-content {
+	padding: 0;
+	background-color: transparent;
+	border-radius: 0;
+	border: none;
+}
+
+.popup-send-alerts .ui-tab-content h3 {
+	display: none;
+}
+
+.popup-send-alerts {
+	width: 750px !important;
+}

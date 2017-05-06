@@ -1,0 +1,48 @@
+<div class="box">
+	<h2>Send Alerts</h2>
+
+	<div class="ui-tab-group">
+
+		<div class="ui-tab-content" style="display: block;-webkit-border-top-left-radius: 4px;n -moz-border-radius-topleft: 4px; border-top-left-radius: 4px;">
+			<h3>Email Alert Options</h3>
+
+			<table>
+				<tr>
+					<td style="min-width: 140px;">
+						<strong>Send email to user(s)</strong>
+						<br />
+						<select class="recipient-type">
+							<option value="sheet">in sheet</option>
+							<option value="request">in request</option>
+							<option value="user">by name</option>
+						</select>
+					</td>
+					<td style="padding-left: 10px;">
+						<strong>Template:</strong>
+						<br />
+						<select class="alert-template"></select>
+					</td>
+				</tr>
+			</table>
+
+			<div class="recipient-tbl"></div>
+
+			<h3>Preview:</h3>
+
+			<div class="alert-preview">
+				To: <br>
+				<input class="preview-to" type="text" disabled>
+
+				Subject: <br>
+				<input class="preview-subject" type="text" disabled>
+
+				Message:
+				<textarea class="preview-message" disabled></textarea>
+			</div>
+
+			<div class="right"><label><input class="customize-toggle" type="checkbox"><span style="vertical-align: middle;"></span> Customize?</label></div>
+
+			<input type="button" class="send-alert" value="Send Email(s)">
+		</div>
+	</div>
+</div>

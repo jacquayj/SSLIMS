@@ -1,0 +1,78 @@
+<div class="box">
+	<div class="ui-tab-group">
+
+		<ul class="ui-tabs">
+			<li><a href="#settings">Account Settings</a></li>
+			<li><a href="#settings/contact">Contact Information</a></li>
+			
+			<div class="clear"></div>
+		</ul>
+
+		<div class="ui-tab-content">
+			<h2>Account Settings</h2>
+			<form>
+				<table>
+					<tbody><tr>
+						<td>
+							<label>Auto Collapse Side Navigation</label>
+							<select id="setting-auto-collapse">
+								<option>No</option>
+								<option<%= (SSLIMS.accountSettings.auto_collapse == 'Yes') ? ' selected' : '' %>>Yes</option>
+							</select>
+						</td>
+						<td>
+							<label>UI Cache</label>
+							<input type="button" value="Clear UI Cache" id="clear-ui-cache" />
+						</td>
+					</tr>
+				</tbody></table>
+			</form>
+		</div>
+
+		<div class="ui-tab-content">
+
+			<% if ( SSLIMS.user.get('user_type') == 'customer' ) { %>
+				<h2>Contact Information</h2>
+			<% } else { %>
+				<h2><img id="auth-uf-logo" src="/images/uf.png" />Authenticated with GatorLink</h2>
+			<% } %>
+
+			<form action="" method="post">
+				<table>
+					<tbody>
+					<tr>
+						<td>
+							<label for="first-name">First Name</label>
+							<input type="text" disabled id="first-name" value="<%- SSLIMS.user.get('first_name') %>" />
+						</td>
+						<td>
+							<label for="last-name">Last Name</label>
+							<input type="text" disabled id="last-name" value="<%- SSLIMS.user.get('last_name') %>" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<label for="email">Email</label>
+							<input type="text" disabled id="email" value="<%- SSLIMS.user.get('email') %>" />
+						</td>
+					</tr>
+				</tbody>
+
+				</table>
+
+				<div class="clear"></div>
+			</form>
+		</div>
+
+	</div>
+</div>
+
+
+<% if ( SSLIMS.iOS() && !SSLIMS.isFullScreen() ) { %>
+	<div class="box">
+		<h2>Home Screen Icon</h2>
+		
+		<input type="button" class="btn-blue" id="add-to-home-screen" value="Add SSLIMS to Home Screen">
+
+	</div>
+<% } %>

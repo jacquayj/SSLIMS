@@ -1,0 +1,7 @@
+.alert-templates textarea {
+	margin-top: 19px;
+}
+
+.alert-templates th:nth-child(3) { 
+	min-width: 200px;
+}

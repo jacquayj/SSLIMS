@@ -1,0 +1,254 @@
+<% if ( model.get('runs') && model.get('runs').length > 0 ) { %>
+	<div class="box">
+
+		<h2>Sequencing Data</h2>
+
+		<div class="ui-tab-group">
+
+			<ul class="ui-tabs">
+				<% _.each(model.get('runs'), function(run, index) { %>
+					<li>
+						<a href="#samples/<%= model.get('id') %>/runs/<%= run.id %>">Run on <%= (new Date(model.get('created_at'))).toDateString() %></a>
+					</li>
+				<% }); %>
+				
+				<div class="clear"></div>
+			</ul>
+
+			<% _.each(model.get('runs'), function(r) { %>
+				<div class="ui-tab-content">
+					<% if ( run.get('id') == r.id ) { %>
+					<form>
+						<p class="right"><% if ( SSLIMS.user.get('user_type') != 'customer' ) { %><a href="#sheets/<%= run.get('sheet_id') %>/sample/<%= run.get('sample_id') %>">View Sample Sheet</a> // <% } %>Run data imported on <%= (new Date(run.get('created_at'))).toLocaleString() %> <% if ( SSLIMS.user.get('user_type') != 'customer' ) { %><span class="glyphicon glyphicon-remove delete-run"></span><% } %></p>
+						<% if ( run.get('ab1_file') || run.get('edited_ab1_file') ) { %>
+							<% if ( run.get('ab1_file') ) { %>
+								<h3>Download Data</h3>
+								<div class="download-btns">
+									<a href="<%= SSLIMS.API_URL %>/files/<%= run.get('ab1_file') %>?download=1"><input type="button" value="Chromatogram (.ab1)" style="margin-right: 15px;" /></a>
+									<a href="<%= SSLIMS.API_URL %>/files/<%= run.get('seq_file') %>?download=1"><input type="button" class="btn-green" value="FASTA (.seq)" /></a>
+								</div>
+							<% } %>
+						
+							<% if ( run.get('edited_ab1_file') ) { %>
+								<h3>Download Edited Data</h3>
+								<div class="download-btns">
+									<a href="<%= SSLIMS.API_URL %>/files/<%= run.get('edited_ab1_file') %>?download=1"><input type="button" style="margin-right: 15px;" value="Edited Chromatogram (.ab1)" /></a>
+									<a href="<%= SSLIMS.API_URL %>/files/<%= run.get('edited_seq_file') %>?download=1"><input type="button" class="btn-green" value="Edited FASTA (.seq)" /></a>
+								</div>
+							<% } %>
+
+							<h3>Chromatogram<%= run.get('edited_ab1_file') ? ' (unedited view)' : '' %></h3>
+							
+							<div class="chromatogram">
+								<img class="chromatogram-next" src="/images/forward.png" />
+								<img class="chromatogram-previous" src="/images/backwards.png" />
+
+								<div class="chromatogram-holder">
+									<iframe class="c-1" scrolling="no" seamless="seamless" />
+									<iframe class="c-2" src="<%= run.getSVGURL(state.currentChromatogram) %>" scrolling="no" seamless="seamless" />
+								</div>
+
+								<div class="chromatogram-count">
+									(<span class="chromatogram-current"><%= state.currentChromatogram + 1 %></span> of <%= state.numChromatograms %>)
+								</div>
+							</div>
+
+							<% if ( run.get('edited_seq_file') ) {  %>
+								<h3>FASTA Data (edited)</h3>
+
+								<textarea class="seq-edited"></textarea>
+								<br />
+							<% } %>
+
+							<% if ( run.get('seq_file') ) {  %>
+								<h3>FASTA Data<%= run.get('edited_seq_file') ? ' (unedited)' : '' %></h3>
+
+								<textarea class="seq"></textarea>
+							<% } %>
+
+						<% } %>
+
+						<h3>Sequencing Comments<% if ( SSLIMS.user.get('user_type') != 'customer' ) { %> (Viewable By Customer)<% } %></h3>
+
+						<table id="staff-comments">
+							<tbody>
+							<% if ( run.get('comments').length == 0 ) { %>
+								<tr>
+									<td colspan="2">
+										No comments posted yet
+										<br /><br />
+									</td>
+								</tr>
+							<% } else {
+									var copy = run.get('comments').clone();
+									var comments = [], size = 2;
+									while ( copy.length > 0 ) comments.push(copy.splice(0, size)); 
+
+									_.each(comments, function(set) { %>
+										<tr>
+											<% _.each(set, function(comment) { %>
+												<td>
+													<div class="ui-comment">
+														<a href="#staff/<%= comment.user.get('id') %>"><img class="ui-comment-picture" src="<%= comment.user.getGravitarURL() %>">
+														<span class="ui-comment-name"><%- comment.user.get('first_name') %> <%- comment.user.get('last_name') %></span></a>
+														<span class="ui-comment-age" title="<%=  (new Date(comment.created_at)).toLocaleString() %>"><%=  (new Date(comment.created_at)).timeSince() %> ago</span>
+														<% if ( SSLIMS.user.get('user_type') == 'admin' ) { %>
+															<span class="ui-comment-delete" data-id="<%= comment.id %>">Delete</span>
+														<% } %>
+														<p><%- comment.message %></p>
+													</div>
+												</td>
+												<% if ( set.length == 1 ) { %>
+													<td></td>
+												<% } %>
+											<% }); %>
+										</tr>
+									<% }); 
+								} %>
+							<% if ( SSLIMS.user.get('user_type') != 'customer' ) { %>
+							<tr>
+								<td colspan="2">
+									<input type="button" class="btn-green add-comment" value="Add Comment">
+								</td>
+							</tr>
+							<% } %>
+						</tbody></table>
+
+						<div class="clear"></div>
+					</form>
+					<% } %>
+				</div>
+			<% }); %>
+
+		</div>
+	</div>
+<% } %>
+<div class="box">
+
+	<h2>Sample Information</h2>
+
+	<div class="ui-tab-group">
+
+		<ul class="ui-tabs">
+			<li class="selected"><a href="#samples/<%- model.get('id') %>">Sample Details</a></li>
+		
+			<div class="clear"></div>
+		</ul>
+
+		<div class="ui-tab-content" style="display:block;">
+
+			<p class="right"><%
+				var chkInDate = model.getCheckInDate();
+
+				if ( _.isNull(chkInDate) ) { %>
+					Sample has not been checked-in yet
+				<% } else { %>
+					Sample <%- model.get('name') %> checked-in on <%= chkInDate.toLocaleString() %>
+				<% } %>
+			</p>
+
+			<h3>Status</h3>
+			<div class="ui-progress" style="color:<%= model.getProgressBar().fontColor %>;"><%- model.get('status') %>
+				<div class="ui-progress-bar" percentage="<%= model.getProgressBar().percentage %>%" style="background-color: <%= model.getProgressBar().color %>;"></div>
+			</div>
+
+			<br />
+
+			<form>
+				<div class="left" style="width:49%;">
+					<h3>Template</h3>
+				
+					<table>
+						<tbody><tr>
+							<td>
+								<label>Name</label>
+								<input type="text" value="<%- model.get('name') %>" disabled="">
+							</td>
+							<td>
+								<label>Conc. ng/ul</label>
+								<input type="text" value="<%- model.get('concentration') %>" disabled="">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>ug of DNA</label>
+								<input type="text" value="<%- model.get('dna_ug') %>" disabled="">
+							</td>
+							<td>
+
+							</td>
+						</tr>
+					</tbody></table>
+				</div>
+				<div class="left" style="width:49%;margin-left:2%;">
+					<h3>Revision History</h3>
+					<div class="revision-box">
+						<% _.each(model.getPrettyRevisionList(), function(revision) { %>
+							<strong><%= revision.createdAt %>:</strong><br />
+							<%= revision.msg %>
+							<hr />
+						<% });  %>
+						<strong><%= (new Date(model.get('created_at'))).toLocaleString() %>:</strong> Sample created
+					</div>
+				</div>
+				<div class="clear"></div>
+				<div class="left" style="width:49%;">
+					<h3>DNA Type</h3>
+				
+					<table>
+						<tbody><tr>
+							<td>
+								<label>Name</label>
+								<input type="text" value="<%- model.get('dna_type') %>" disabled="">
+							</td>
+							<td>
+								<label>Size bp</label>
+								<input type="text" disabled="" value="<%- model.get('dna_bp_size') %>">
+							</td>
+						</tr>
+					</tbody></table>
+				</div>
+				<div class="left" style="width:49%;margin-left:2%;">
+					<h3>Misc</h3>
+					<table>
+						<tbody><tr>
+							<td>
+								<label>Primer</label>
+								<input type="text" disabled="" value="<%- model.get('primer').name %>">
+							</td>
+							<td>
+								<label>Special Request</label>
+								<input type="text" disabled="" value="<%- model.get('special_request') %>">
+							</td>
+						</tr>
+					</tbody></table>
+				</div>
+				<div class="clear"></div>
+
+				<% if ( SSLIMS.user.get('user_type') != 'customer' ) { %>
+
+					<% if ( model.get('runs') && model.get('runs').length > 0 ) { %>
+						<input type="button" class="btn-blue sample-send-alert" value="Send Alert">
+					<% } %>
+
+					<% if ( model.get('status') == 'Waiting to receive' ) { %>
+						<input type="button" class="btn-green right sample-checkin" value="Check-in Sample">
+					<% } %>
+					<% if ( model.get('status') == 'Received, ready to load' ) { %>
+						<input type="button" class="btn-green right sample-addsheet" value="Add To Sheet">
+					<% } %>
+					<% if ( model.get('status') == 'Sequencing complete' ) { %>
+						<input type="button" class="btn-green right sample-rerun" value="Rerun Sample">
+					<% } %>
+					<% if ( model.get('status') == 'Loaded, ready for sequencing' ) { %>
+						<input type="button" class="btn-red right sample-rerun" value="Remove From Sheet">
+					<% } %>
+				<% } %>
+				<div class="clear"></div>
+			</form>
+
+		</div>
+
+	</div>
+</div>
+

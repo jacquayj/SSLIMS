@@ -1,0 +1,18 @@
+<div class="ui-popup-wrapper">
+	<div class="ui-popup-vcenter">
+		<div class="ui-popup popup-editalerttemplate popup-reset">
+			<a href="javascript:void(0);" class="ui-popup-close glyphicon glyphicon-remove"></a>
+
+			<h2>Edit Alert Template</h2>
+
+			<label>Subject</label>
+			<input type="text" class="alert-template-subject" value="<%- model.get('subject') %>" />
+
+			<label>Message</label>
+			<textarea class="alert-template-msg"><%- model.get('message') %></textarea>
+
+			<input type="button" class="edit-alert-template btn-green" value="Save Alert Template" />
+
+		</div>
+	</div>
+</div>

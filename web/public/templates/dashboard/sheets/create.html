@@ -1,0 +1,76 @@
+<div class="box" id="new-well-plate">
+
+	<h2>Create Sample Sheet</h2>
+	
+	<div class="ui-tab-group">
+
+		<ul class="ui-tabs">
+			<li><a href="#sheets/create">DNA Sample Sheet</a></li>
+			<!-- <li><a href="#sheets/create/frag">Fragment Analysis Sample Sheet</a></li> -->
+			<div class="clear"></div>
+		</ul>
+
+		<div class="ui-tab-content sample-sheet">
+			<div>
+				<div class="left well-autoload">
+					<h2>Autoload Samples</h2>
+
+					<table>
+						<tr>
+							<td style="width:50%;">
+								<label>Loading Protocol</label>
+								<select class="proto">
+									<option value="vertical">Vertical</option>
+									<option value="horizontal">Horizontal</option>
+								</select>
+							</td>
+							<td>
+								<label>Starting Well Index</label>
+								<input type="text" class="well-index" value="1">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<input type="button" class="load-samples" value="Load Samples">
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="left well-autoload" style="padding-right:0px;">
+					<h2>Sample Sheet Info</h2>
+
+					<table>
+						<tr>
+							<td style="width:50%;">
+								<label>Name</label>
+								<input type="text" value="<%= (new Date()).toLocaleDateString() %>" class="sheet-name">
+							</td>
+							<td>
+								<label>Configuration</label>
+								<select class="sheet-instrument">
+									<% instruments.each(function(instrument) { %>
+										<option value="<%- instrument.get('id') %>"><%- instrument.get('alias') %></option>
+									<% }); %>
+								</select>
+							</td>
+						</tr>
+					</table>
+					<input type="button" value="Create Sheet" class="create-sheet right btn-green">
+					<input type="button" value="Reset Sheet" class="reset-sheet btn-red">
+				</div>
+				<div class="clear"></div>
+			</div>
+			
+		</div>
+		<div class="ui-tab-content">
+		</div>
+
+	</div>
+
+	<div id="info"></div>
+
+</div>
+<div class="box">
+	<div class="well-samples"></div>
+	<div class="well-control-samples"></div>
+</div>

@@ -1,0 +1,145 @@
+<div class="box">
+	<h2>View Sample Sheet <%- model.get('name') %> - Plate ID: <%- model.get('id2') %></h2>
+
+	<div class="ui-tab-group ui-tab-group-w-comments">
+
+		<ul class="ui-tabs">
+			<li><a href="#sheets/<%= model.get('id') %>">Sample Sheet Information</a></li>
+			<li><a href="#sheets/<%= model.get('id') %>/reactionlog">Reaction Log</a></li>
+			<li><a href="#sheets/<%= model.get('id') %>/instrumentlog">Instrument Log</a></li>
+			<% if ( samples.hasRuns ) { %><li><a href="#sheets/<%= model.get('id') %>/comments">Sequencing Comments</a></li><% } %>
+			<div class="clear"></div>
+		</ul>
+
+		<div class="ui-tab-content">
+
+			<form action="" method="post">
+
+				<p class="right" style="white-space: nowrap;">Created on <%= (new Date(model.get('created_at'))).toLocaleString() %> by <a href="#staff/<%= model.get('user').id %>"><%= model.get('user').first_name %> <%= model.get('user').last_name %></a></p>
+				<h3>Progress</h3>
+				<div class="ui-progress" style="color:<%= model.getProgressBar().fontColor %>;"><%- model.get('status') %>
+					<div class="ui-progress-bar" percentage="<%= model.getProgressBar().percentage %>%" style="background-color: <%= model.getProgressBar().color %>;"></div>
+				</div>
+				
+				<br />
+
+				<h3>Actions</h3>
+				<div class="sheet-actions" style="text-align:center;">
+					<input type="button" value="Download Plate (.plt) File" class="download-btn" />
+					<% if ( model.get('status') == 'Sequencing complete' ) { %>
+						<input type="button" class="enter-comments btn-green" value="Enter Sequencing Comments" name="comments" />
+						
+					<% } %>
+					<input type="button" class="send-alerts btn-red" value="Send Alerts" />
+				</div>
+				<br />
+				<br />
+
+				<div class="left" style="width:49%;">
+					<h3>Sample Sheet Details</h3>
+
+					<table>
+						<tbody><tr>
+							<td style="width:50%;">
+								<label>Name</label>
+								<input type="text" disabled value="<%- model.get('name') %>" />
+							</td>
+							<td style="width:50%;">
+								<label># of Samples</label>
+								<input type="text" disabled value="<%= Object.keys(model.get('wells')).length %>" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>Date Created</label>
+								<input type="text" disabled value="<%= (new Date(model.get('created_at'))).toLocaleString() %>" />
+							</td>
+							<td>
+								<label>Instrument Config</label>
+								<input type="text" disabled value="<%- model.get('instrument').alias %>" />
+							</td>
+						</tr>
+					</tbody></table>
+				</div>
+				<div class="left" style="width:49%;margin-left:2%;height: 203px;">
+					<h3>Revision History</h3>
+					<div class="revision-box">
+						<% _.each(model.getPrettyRevisionList(), function(revision) { %>
+							<strong><%= revision.createdAt %>:</strong><br />
+							<%= revision.msg %>
+							<hr />
+						<% });  %>
+						<strong><%= (new Date(model.get('created_at'))).toLocaleString() %>:</strong> Sheet created
+					</div>
+				</div>
+				<div class="clear"></div>
+
+				<div class="sheet-samples"></div>
+
+			</form>
+		</div>
+		<div class="ui-tab-content"><div class="reaction-log"></div></div>
+		<div class="ui-tab-content"><div class="instrument-log"></div></div>
+		<div class="ui-tab-content sheet-comments"></div>
+	</div>
+	
+</div>
+<div class="box">
+	<h2>Sample Sheet Wells</h2>
+
+	<div class="ui-tab-group ui-tab-group-w-wells">
+		<div class="ui-tab-content no-tabs sample-sheet"></div>
+	</div>
+
+	<br /><br />
+
+	<h2>Upload Edited Chromatograms</h2>
+
+	<div class="ui-tab-group">
+		<div class="ui-tab-content no-tabs download-data">
+			<h3>Upload</h3>
+			<input type="button" class="btn btn-green upload-chromatograms" value="Upload Edited Chromatograms" />
+		</div>
+	</div>
+
+	<% if ( model.get('status') == 'Sequencing complete' ) { %>
+
+		<br /><br />
+
+		<h2>Sheet Sequencing Data</h2>
+
+		<div class="ui-tab-group">
+			<div class="ui-tab-content no-tabs download-data">
+				<h3>Download</h3>
+				<table>
+					<tbody><tr>
+						<td>
+							<label>Data Format</label>
+							<select class="download-data-format">
+								<option value="combined_ab1_seq">Combined (.ab1 + .seq)</option>
+								<option value="combined">Combined (.ab1 + .seq + .svg)</option>
+								<option selected value="ab1">.ab1</option>
+								<option value="seq">.seq</option>
+								<option value="svg">.svg</option>
+							</select>
+						</td>
+						<td>
+							<label>Archive Format</label>
+							<select class="download-format">
+								<option value="zip">.zip</option>
+								<!--<option value="7z">.7z</option>-->
+							</select>
+						</td>
+						<td style="vertical-align: bottom;">
+							<input type="button" class="btn-blue sheet-data-download" style="margin-bottom:3px;" value="Download Archive">
+						</td>
+					</tr>
+
+				</tbody></table>
+				
+			</div>
+		</div>
+
+	<% } %>
+
+</div>

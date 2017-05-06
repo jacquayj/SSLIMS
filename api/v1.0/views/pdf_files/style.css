@@ -1,0 +1,84 @@
+body {
+    background-color: white;
+}
+h1 {
+    color: black;
+    margin-left: 20px;
+    margin-bottom: 0px;
+    font-family: Helvetica;
+}
+h2 {
+	color: black;
+	margin-left: 20px;
+	margin-top: 0px;
+	font-family: Helvetica;
+	font-size: 12px;
+}
+table {
+	font-family: Helvetica;
+}
+table.address-right td {
+	text-align: right;
+	padding-right: 15px;
+}
+table.address-left td {	
+	padding-left: 15px;
+}
+table.content-right td {
+	padding-right: 10px;
+}
+table.content-left td {
+	padding-left: 10px;
+
+}
+table.data-table tr td:nth-child(1) {
+	text-align: right;
+
+}
+table.data-table tr td:nth-child(2) {
+	text-align: left;
+
+}
+table.date {
+	padding-right: 15px;	
+	padding-bottom: 10px;
+	text-align: right;
+}
+img.qr {
+	border: 5px solid white;
+	width: 100px;
+	height: 100px;
+}
+img.logo {
+	height: 100px;
+	width: 100px;
+}
+img.sslims-logo {
+	height: 100px;
+	width: 120px;
+}
+section {
+	float: left;
+	width: 100%;
+	background-color: #f9f9f9;
+	padding-top: 10px;	
+	padding-bottom: 20px;
+}
+section.top {
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+section.content {
+}
+footer {
+    background-color:#e0e0e0;
+    color:white;
+    clear:both;
+    height: 130px;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+}

@@ -1,0 +1,17 @@
+.recipient-tbl h2 {
+	display: none;
+}
+
+.recipient-type, .alert-template {
+	width: 100%;
+}
+
+.preview-message {
+	min-height: 150px;
+	margin-bottom: 10px;
+}
+
+.preview-to, .preview-subject {
+	width: 100% !important;
+	margin-bottom: 5px;
+}

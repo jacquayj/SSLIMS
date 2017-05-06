@@ -1,0 +1,9 @@
+.homescreen-instruct {
+	width: 350px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+
+#home-screen-view label {
+	font-weight: bold;
+}

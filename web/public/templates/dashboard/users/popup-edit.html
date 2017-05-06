@@ -1,0 +1,114 @@
+<div class="ui-popup-wrapper">
+	<div class="ui-popup-vcenter">
+		<div class="ui-popup popup-edituser popup-edit">
+			<a href="javascript:void(0);" class="ui-popup-close glyphicon glyphicon-remove"></a>
+			
+			<% if ( userModel.get('user_type') == 'data_client' ) { %>
+				<form>
+
+
+					<h2>Edit Data Client</h2>
+
+					<table>
+						<tr>
+							<td>
+								<label>Name</label>
+								<label>
+									<input type="text" id="name" value="<%- userModel.get('name') %>" />
+								</label>
+							</td>
+							<td>
+								<label>API Key</label>
+								<label>
+									<input type="text" disabled id="client_api_key" value="<%- userModel.get('client_api_key') %>" />
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>Status</label>
+								<label>
+									<select id="status">
+										<option value="active">Active</option>
+										<option value="disabled" <%= (userModel.get('status') == 'disabled') ? ' selected' : '' %>>Disabled</option>
+									</select>
+								</label>
+							</td>
+							<td>
+								
+							</td>
+							
+						</tr>
+						
+					</table>
+
+					<input type="submit" value="Save" class="btn-green" id="save-btn" />
+					<input type="button" value="Delete Client" class="btn-red right" id="delete-btn" />
+
+				</form>
+
+			<% } else { %>
+				<form>
+					<h2>Edit User Account</h2>
+
+					<table>
+						<tr>
+							<td>
+								<label>First Name</label>
+								<label>
+									<input type="text" id="first_name" value="<%- userModel.get('first_name') %>" />
+								</label>
+							</td>
+							<td>
+								<label>Last Name</label>
+								<label>
+									<input type="text" id="last_name" value="<%- userModel.get('last_name') %>" />
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>Email</label>
+								<label>
+									<input type="text" id="email" value="<%- userModel.get('email') %>" />
+								</label>
+							</td>
+							<td>
+								<label>User Type</label>
+								<label>
+									<select id="user_type"<%= (userModel.get('id') == SSLIMS.user.get('id')) ? ' disabled' : '' %>>
+										<option value="staff">Staff</option>
+										<option value="admin"<%= (userModel.get('user_type') == 'admin') ? ' selected' : '' %>>Administrator</option>
+										<option value="customer"<%= (userModel.get('user_type') == 'customer') ? ' selected' : '' %>>Customer</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label>Status</label>
+								<label>
+									<select id="status"<%= (userModel.get('id') == SSLIMS.user.get('id')) ? ' disabled' : '' %>>
+										<option value="active">Active</option>
+										<option value="disabled" <%= (userModel.get('status') == 'disabled') ? ' selected' : '' %>>Disabled</option>
+									</select>
+								</label>
+							</td>
+							<td>
+								
+							</td>
+							
+						</tr>
+					</table>
+
+					<input type="submit" value="Save" class="btn-green" id="save-btn" />
+					<% if ( userModel.get('id') != SSLIMS.user.get('id') ) {  %>
+						<input type="button" value="Delete Account" class="btn-red right" id="delete-btn" />
+					<% } %>
+
+				</form>
+			<% } %>
+			
+		</div>
+	</div>
+</div>

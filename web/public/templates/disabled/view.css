@@ -1,0 +1,143 @@
+html {
+	overflow: hidden;
+}
+
+#login-view, #application {
+	overflow: auto;
+	height: 100%;
+	position: relative;
+	overflow-x: hidden;
+}
+
+body {
+	background-color: #e5e5e5;
+	position: relative;
+	
+}
+
+h1 {
+	font-size: 27px;
+	font-weight: normal;
+	color: #68686c;
+	margin-bottom: 30px;
+}
+
+td {
+	padding-bottom: 0 !important;
+}
+
+.loader {
+	position: absolute;
+	top: 9px;
+	left: 135px;
+	display: none;
+}
+
+#thankyou {
+	margin-top: 30px;
+	display: none;
+}
+
+#thankyou h2 {
+	text-align: center;
+}
+
+#disabled-account-view {
+	display: table;
+	margin: auto;
+	height: 100%;
+}
+
+#container {
+	width: 1000px;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#form-container {
+	width: 700px;
+	float: right;
+	margin-top: -34px;
+}
+
+#form-container #inner {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	position: relative;
+	width: 100%;
+	padding: 30px;
+	background-color: #f1f1f2;
+	border: solid 1px #d1d1d4;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#form-container a {
+	text-decoration: none;
+	color: #858589;
+}
+
+#arrow-left {
+	position: absolute;
+	top: 160px;
+	left: -17px;
+	width: 17px;
+	height: 21px;
+	background-image: url(/images/arrow-left.png);
+}
+
+#footer {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 32px;
+	border-top: solid 1px #d1d1d4;
+	background-color: #f1f1f2;
+	text-align: center;
+	line-height: 32px;
+	color: #68686c;
+}
+
+#logo {
+	margin-top: 25px;
+}
+
+#check {
+	width: 220px !important;
+	margin-top: 15px;
+}
+
+#submit {
+	margin-bottom: 15px;
+}
+
+label {
+	font-weight: bold;
+	margin-bottom: 5px;
+	position: relative;
+}
+
+textarea {
+	font-family: Helvetica;
+}
+
+td {
+	padding-top: 15px;
+}
+
+td:last-child {
+	padding-left: 10px;
+}
+
+#inner input {
+	width: 100%;
+}
+
+#inner input[type=submit], #inner input[type=button] {
+	display: block;
+	width: 200px;
+	margin: auto;
+}

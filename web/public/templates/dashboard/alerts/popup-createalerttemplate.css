@@ -1,0 +1,9 @@
+.popup-createalerttemplate input[type="text"] {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.popup-createalerttemplate textarea {
+	height: 200px;
+	margin-bottom: 5px;
+}

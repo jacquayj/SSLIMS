@@ -1,0 +1,219 @@
+<% if ( model.get('name') ) { %>
+
+<div class="box">
+	<h2>View Request <%- model.get('name') %></h2>
+
+	<div class="ui-tab-group">
+
+		<ul class="ui-tabs">
+			<li><a href="#requests/<%- model.get('id') %>">Request Details</a></li>
+			<li><a href="#requests/<%- model.get('id') %>/scanform">Scan Form (.pdf)</a></li>
+			<div class="clear"></div>
+		</ul>
+
+		<div class="ui-tab-content">
+
+			<form action="" method="post">
+				
+			<% if ( _.isUndefined(model.get('begun')) || !model.get('begun') ) { %>
+				<div class="warning-msg">
+					Please click the "Begin" button in iLab for this request. You will be unable to check-in samples from this request until you do so. It may take a minute or two after the begin button is pressed in iLab for the systems to synchronize.
+				</div> 
+			<% } %>
+
+				<p class="right">Submitted by 
+			<% if ( SSLIMS.user.get('user_type') == 'customer' ) { %>
+				<%- model.get('user').first_name %> <%- model.get('user').last_name %>
+			<% } else { %>
+				<a href="#customers/<%- model.get('user').id %>"><%- model.get('user').first_name %> <%- model.get('user').last_name %></a>
+			<% } %>
+			 on <%- (new Date(model.get('created_at'))).toLocaleString() %></p>
+				<h3>Progress</h3>
+				<div class="ui-progress" style="color: <%= progressBar.textColor %>;"><%= progressBar.status %>
+					<div class="ui-progress-bar" percentage="<%= progressBar.percentage %>%" style="background-color: <%= progressBar.color %>;"></div>
+				</div>
+						
+				
+				<br />
+
+				<% if ( model.get('complete') ) { %>
+					<h3>Download Data (All Sequenced Samples)</h3>
+					<table>
+						<tbody><tr>
+							<td>
+								<label>Data Format</label>
+								<select class="download-data">
+									<option selected value="combined_ab1_seq">Combined (.ab1 + .seq)</option>
+									<option value="combined">Combined (.ab1 + .seq + .svg)</option>
+									<option value="ab1">.ab1</option>
+									<option value="seq">.seq</option>
+									<option value="svg">.svg</option>
+								</select>
+							</td>
+							<td>
+								<label>Archive Format</label>
+								<select class="download-format">
+									<option value="zip">.zip</option>
+									<!--<option value="7z">.7z</option>-->
+								</select>
+							</td>
+							<td style="vertical-align: bottom;">
+								<input type="button" class="btn-blue request-download" style="margin-bottom:3px;" value="Download Archive">
+							</td>
+						</tr>
+
+					</tbody></table>
+
+					<br />
+				<% } %>
+
+				<h3>Request Information</h3>
+
+				<table>
+					<tbody><tr>
+						<td style="width:50%;">
+							<label for="service-id">iLab Service ID</label>
+							<input type="text" id="service-id" value="<%- model.get('name') %>" disabled="">
+						</td>
+						<td style="width:50%;">
+							<label for="service-type">Service Type</label>
+							<input type="text" id="service-type" value="<%- model.get('service_type') %>" disabled="">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="pi-name">PI Name</label>
+							<input type="text" id="pi-name" value="<%- model.get('pi_name') %>" disabled="">
+						</td>
+						<td>
+							<label for="phone">Contact Phone:</label>
+							<input type="text" id="phone" value="<%- model.get('contact_phone') %>" disabled="">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="ilab-user">iLab Submitter</label>
+							<% if ( _.isUndefined(model.get('ilab_user')) ) { %>
+								<input type="text" id="ilab-user" value="Not Available" disabled="">
+							<% } else { %>
+								<input type="text" id="ilab-user" value="<%- model.get('ilab_user').first_name %> <%- model.get('ilab_user').last_name %> &lt;<%- model.get('ilab_user').email %>&gt;" disabled="">
+							<% } %>
+						</td>
+						<td>
+							<label for="customer">Data Delivery User</label>
+							<input type="text" id="customer" value="<%- model.get('user').first_name %> <%- model.get('user').last_name %> &lt;<%- model.get('user').email %>&gt;" disabled="">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>Additional Information</label>
+							<textarea id="add-info" style="display: block; height: 100%;" disabled=""><%- model.get('notes') %></textarea>
+						</td>
+						<td>
+							<label>Photo</label>
+							<div class="sample-image-disabled">
+								<img id="sample-img" src="<%= model.getPhotoURL() %>">
+							</div>
+
+						</td>
+					</tr>
+					</tbody></table>
+
+				<br />
+
+				<% if ( SSLIMS.user.get('user_type') != 'customer' ) { %>
+					<h3>Physical Location</h3>
+					<table style="width:auto;">
+						<tbody><tr>
+							<td>
+								<label>Box Number/Location</label>
+								<input type="text" id="request-location" style="width:160px;" value="<%- model.get('location') %>">
+							</td>
+							<td style="vertical-align: bottom;">
+								<input type="button" class="btn-blue request-location-save" style="margin-bottom:3px;" value="Save">
+							</td>
+						</tr>
+
+					</tbody></table>
+
+					<br />
+				<% } %>
+				
+				<% if ( SSLIMS.user.get('user_type') != 'customer' ) { %>
+				
+				<h3>Staff Comments (Hidden From Customer)</h3>
+
+				<table id="request-comments">
+					<tbody>
+					<% if ( model.get('comments').length == 0 ) { %>
+						<tr>
+							<td colspan="2">
+								No comments posted yet
+								<br /><br />
+							</td>
+						</tr>
+					<% } else {
+							var copy = model.get('comments').clone();
+							var comments = [], size = 2;
+							while ( copy.length > 0 ) comments.push(copy.splice(0, size)); 
+
+							_.each(comments, function(set) { %>
+								<tr>
+									<% _.each(set, function(comment) { %>
+										<td>
+											<div class="ui-comment">
+												<a href="#staff/<%= comment.user.get('id') %>"><img class="ui-comment-picture" src="<%= comment.user.getGravitarURL() %>">
+												<span class="ui-comment-name"><%- comment.user.get('first_name') %> <%- comment.user.get('last_name') %></span></a>
+												<span class="ui-comment-age" title="<%=  (new Date(comment.created_at)).toLocaleString() %>"><%=  (new Date(comment.created_at)).timeSince() %> ago</span>
+												<% if ( SSLIMS.user.get('user_type') == 'admin' ) { %>
+													<span class="ui-comment-delete" data-id="<%= comment.id %>">Delete</span>
+												<% } %>
+												<p><%- comment.message %></p>
+											</div>
+										</td>
+										<% if ( set.length == 1 ) { %>
+											<td></td>
+										<% } %>
+									<% }); %>
+								</tr>
+							<% }); 
+						} %>
+					
+					<tr>
+						<td colspan="2">
+							<input type="button" class="btn-green" id="add-comment" value="Add Comment">
+						</td>
+					</tr>
+					
+				</tbody></table>
+
+				
+					<h3></h3>
+
+					<% if ( SSLIMS.user.get('user_type') == 'admin' ) { %>
+						<input type="button" class="delete-request btn-red" value="Delete" />
+					<% } %>
+					<input type="button" class="right send-alerts btn-blue" value="Send Alerts" />
+				<% } %>
+				
+				<div class="clear"></div>
+			</form>
+		</div>
+
+		<div class="ui-tab-content">
+			<div class="request-scanform-iframe"></div>
+		</div>
+
+	</div>
+	
+</div>
+<div class="box">
+	<div id="sequenced-samples"></div>
+	<br /><br />
+	<div id="samples"></div>
+</div>
+<% } else { %>
+	<div class="box">
+		<h2>Request Not Found, please go back and try again</h2>
+	</div>
+<% } %>

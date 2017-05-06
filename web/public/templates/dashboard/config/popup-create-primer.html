@@ -1,0 +1,44 @@
+<div class="ui-popup-wrapper">
+	<div class="ui-popup-vcenter">
+		<div class="ui-popup popup-reset">
+			<a href="javascript:void(0);" class="ui-popup-close glyphicon glyphicon-remove"></a>
+			
+			<form>
+				<h2>Create DNA Primer</h2>
+
+				<table>
+					<tbody>
+					<tr>
+						<td>
+							<label>Name</label>
+							<label>
+								<input type="text" id="name">
+							</label>
+						</td>
+						<td>
+							<label>Melting Point &deg;C</label>
+							<label>
+								<input type="text" id="melting_point">
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<label>Sequence</label>
+							<label>
+								<textarea id="sequence"></textarea>
+							</label>
+						</td>
+					</tr>
+				</tbody></table>
+
+					<input type="submit" value="Create Primer" class="btn-green" id="create-btn">
+				
+					<input type="button" value="Cancel" class="btn-red right" id="cancel-btn">
+				
+
+			</form>
+		</div>
+	</div>
+</div>
+

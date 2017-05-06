@@ -1,0 +1,23 @@
+sftp-config.json
+.DS_Store
+._*
+.powrc
+.rvmrc
+*.db
+tmp
+*.log
+sslims.min.js
+raw-runs
+ilab-api-test.rb
+data-mount
+test_api.rb
+*.suo
+bin
+obj
+*.exe
+test.rb
+sync/Example Data
+sync/SSLIMS Client-cache
+sync/AnyCPU_DebugSetupFiles
+sync/AnyCPU_ReleaseSetupFiles
+SSLIMS Client.aip

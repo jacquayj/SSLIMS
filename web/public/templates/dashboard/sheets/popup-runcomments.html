@@ -1,0 +1,65 @@
+<div class="ui-popup-wrapper">
+	<div class="ui-popup-vcenter">
+		<div class="ui-popup popup-runcomments popup-reset">
+			<a href="javascript:void(0);" class="ui-popup-close glyphicon glyphicon-remove"></a>
+
+			<h2>Enter Run Comments</h2>
+
+			<table>
+				<tr>
+					<td></td>
+					<td style="width: 186px;"><strong>Run</strong></td>
+					<td style="width: 75px;" class="t-center"><strong>Sample</strong></td>
+					<td style="width: 55px;" class="t-center"><strong>Well</strong></td>
+					<td><strong>Comment</strong></td>
+				</tr>
+				<% 
+				
+				_.each(sortSamples, function(sample) {
+
+					var wellName = sample.wellName;
+
+					var runs = new SSLIMS.Runs(sample.get('runs'));
+
+					// This guy can have multiple runs
+					var sheetRuns = runs.where({sheet_id: sample.get('sheet_id')});
+
+					_.each(sheetRuns, function(r) {
+					%>
+						<tr class="comment-row">
+							<input type="hidden" class="run-id" value="<%= r.get('id') %>" />
+							<td><span class="glyphicon glyphicon-remove del-run" delid="<%= r.get('id') %>"></span></td>
+							<td>Run on <%= (new Date(r.get('created_at'))).toLocaleString() %></td>
+							<td class="t-center"><%- sample.get('name') %></td>
+							<td class="t-center"><%= wellName %></td>
+							<td>
+								<input class="run-comment" type="text" />
+								<select>
+									<option>Custom</option>
+									<option>Stutter peaks due to repetitive sequence(poly A tail)</option>
+									<option>Possible contamination, will rerun</option>
+									<option>More than one template or primer site, will rerun</option>
+									<option>Possible structure problem, will rerun using different chemistry</option>
+									<option>Noisy-Muliple sequencing products present in reaction</option>
+									<option>Poor results due to delayed sample migration in capillary</option>
+									<option>Sequence results poor, contact core staff</option>
+									<option>Short sequences due to early signal stop</option>
+									<option>Failed and will rerun</option>
+									<option>Too much DNA, will dilute and rerun</option>
+									<option>Not enough DNA, will rerun</option>
+									<option>Failed reaction, No signals</option>
+								</select>
+							</td>
+						</tr><% 
+					}); 
+				}); 
+				%>
+				
+
+			</table>
+			<br />
+			<input type="button" class="submit-comments right btn-green" value="Submit Comments" />
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>

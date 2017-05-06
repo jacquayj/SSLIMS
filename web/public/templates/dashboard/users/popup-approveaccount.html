@@ -1,0 +1,55 @@
+<div class="ui-popup-wrapper">
+	<div class="ui-popup-vcenter">
+		<div class="ui-popup popup-approveaccount popup-reset">
+			<a href="javascript:void(0);" class="ui-popup-close glyphicon glyphicon-remove"></a>
+			
+			<form>
+				<h2>Approve Account Request</h2>
+
+				<table>
+					<tr>
+						<td>
+							<label>First Name</label>
+							<label>
+								<input type="text" id="first_name" value="<%- requestModel.get('first_name') %>" />
+							</label>
+						</td>
+						<td>
+							<label>Last Name</label>
+							<label>
+								<input type="text" id="last_name" value="<%- requestModel.get('last_name') %>" />
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>Email</label>
+							<label>
+								<input type="text" id="email" value="<%- requestModel.get('email') %>" />
+							</label>
+						</td>
+						<td>
+							<label>User Type</label>
+							<label>
+								<select id="user_type">
+									<option value="staff">Staff</option>
+									<option value="admin">Administrator</option>
+								</select>
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<label>Message</label>
+							<textarea disabled><%- requestModel.get('message') %></textarea>
+						</td>
+					</tr>
+				</table>
+
+				<input type="submit" value="Create Account" class="btn-green" id="create-btn" />
+				<input type="button" value="Delete" class="btn-red" id="delete-btn" />
+
+			</form>
+		</div>
+	</div>
+</div>

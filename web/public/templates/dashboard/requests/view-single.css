@@ -1,0 +1,16 @@
+
+#request-comments td {
+	width: 50%;
+}
+
+#request-scanform-iframe {
+  width: 100%;
+  border: 0;
+  height: 722px;
+}
+
+.request-scanform-iframe {
+  -webkit-overflow-scrolling: touch;
+  overflow: scroll;
+  width: 100%;
+}

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Mail Templates :: SSLIMS</title>
+
+	<link rel="stylesheet" type="text/css" href="css/glyphicons.css">
+	<link rel="stylesheet" type="text/css" href="css/theme.css">
+	<link rel="stylesheet" type="text/css" href="css/dashboard.css">
+
+	<link rel="apple-touch-icon" href="images/touch-icon-ipad.png" />
+
+</head>
+
+<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="js/underscore-min.js"></script>
+<script type="text/javascript" src="js/backbone-min.js"></script>
+<script type="text/javascript" src="js/jquery.stayInWebApp.min.js"></script>
+
+<script type="text/javascript">
+
+$(function() {
+
+	var sidebar = $("#sidebar");
+	var page = $("#page");
+	
+
+	$("#expand").click(function() {
+		if ( page.css('margin-left') == "185px" ) {
+			page.animate({
+				"margin-left": "0px"
+			}, 500);
+		} else {
+			page.animate({
+				"margin-left": "185px"
+			}, 500);
+		}
+	});
+
+	$("#logout").click(function() {
+		$("#login").css({
+			"border-right": "solid 10px #3b3a3f"
+		});
+		page.animate({
+			"margin-left": "10px"
+		}, 500, function() {
+			$("#login").animate({
+				left: "0%"
+			}, 1000, function() {
+				document.location = "login.html";
+			});
+		});
+	});
+
+	$(".dismiss-alert").click(function() {
+		$(this).parent().slideUp(500);
+	});
+
+	$.stayInWebApp();
+
+});
+
+</script>
+
+<body>
+
+	<div id="sidebar">
+
+		<a href="index.html">
+			<img src="images/logo-small.png" id="logo" />
+		</a>
+
+		<div id="navigation">
+
+			<h3>Requests</h3>
+
+			<ul>
+				<li>
+					<a href="index.html">
+						<span class="glyphicon glyphicon-bookmark"></span> Dashboard
+					</a>
+				</li>
+				<li>
+					<a href="request_view.html">
+						<span class="glyphicon glyphicon-th-list"></span> View Requests
+					</a>
+				</li>
+				<li>
+					<a href="request_create.html">
+						<span class="glyphicon glyphicon-plus"></span> Create Request
+					</a>
+				</li>
+			</ul>
+
+			<h3>Workflow</h3>
+
+			<ul>
+				<li>
+					<a href="sample_checkin.html">
+						<span class="glyphicon glyphicon-qrcode"></span> Check-in Sample
+					</a>
+				</li>
+				<li>
+					<a href="sheet_view.html">
+						<span class="glyphicon glyphicon-th-list"></span> View Sheets
+					</a>
+				</li>
+				<li>
+					<a href="sheet_create.html">
+						<span class="glyphicon glyphicon-flash"></span> Create Sheet
+					</a>
+				</li>
+				<li>
+					<a href="alert_send.html">
+						<span class="glyphicon glyphicon-exclamation-sign"></span> Send Alerts
+					</a>
+				</li>
+				
+			</ul>
+
+
+			<h3>Settings</h3>
+
+			<ul>
+				<li class="selected">
+					<a href="alert_templates.html">
+						<span class="glyphicon glyphicon-envelope"></span> Alert Templates
+					</a>
+				</li>
+				<li>
+					<a href="instrument_settings.html">
+						<span class="glyphicon glyphicon-tasks"></span> Instruments
+					</a>
+				</li>
+				<li>
+					<a href="account_settings.html">
+						<span class="glyphicon glyphicon-cog"></span> Accounts
+					</a>
+				</li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+
+	</div>
+	<div id="page" style="margin-left: 185px;">
+		<div id="header">
+
+			<a href="#">
+				<img src="images/icon-expand.png" id="expand" />
+			</a>
+
+			<input type="text" id="site-search" class="search" placeholder="Search..." />
+
+			<a href="#" class="glyphicon glyphicon-log-out" id="logout" title="Logout"></a>
+
+			<div id="account">
+				<a href="settings.html"><span class="glyphicon glyphicon-cog"></span> John Jacquay</a>
+			</div>
+
+			<ul id="bread">
+				<li>/</li>
+				<li><a href="index.html">Dashboard</a></li>
+				<li>/</li>
+				<li><a href="alert_templates.html" class="selected">Alert Templates</a></li>
+				<li style="float:right;"><a href="#" class="glyphicon glyphicon-info-sign help-btn"></a></li>
+			</ul>
+		</div>
+
+		<div id="container">
+			<div id="content">
+
+				<div class="box">
+					<h2>Mail Templates</h2>
+					
+					<div class="table-container">
+						<table class="ui-table">
+							<thead>
+								<tr>
+									<th class="chk">
+										<label>
+											<input type="checkbox">
+											<span></span>
+										</label>
+									</th>
+									<th>
+										<a href="#">
+											<span class="glyphicon glyphicon-chevron-up"></span> Subject
+										</a>
+									</th>
+									<th><a href="#">Message</a></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="chk">
+										<label>
+											<input type="checkbox">
+											<span></span>
+										</label>
+									</td>
+									<td>Results Available</td>
+									<td style="padding-top: 10px;">
+										<textarea disabled>Hello, {user.name}
+
+Results are available on the server. Please download edited FASTA files if you have requested RS, RL, LS or LL service type. We might still be working on the remaining order.
+
+Regards,
+DNA Sequencing Core, ICBR</textarea></td>
+								</tr>
+								<tr>
+									<td class="chk">
+										<label>
+											<input type="checkbox">
+											<span></span>
+										</label>
+									</td>
+									<td>Reprocessing Message</td>
+									<td style="padding-top: 10px;"><textarea disabled>Hello, {user.name}
+
+The sequencer is down, we are not sequencing at this time.
+
+Regards,
+DNA Sequencing Core, ICBR</textarea></td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="5">
+										<input type="text" class="search" placeholder="filter...">
+
+										<div class="ui-pagination right">
+											<a href="#" class="glyphicon glyphicon-chevron-left"></a>
+											<span><a href="#">1</a></span>
+											<span><a href="#">2</a></span>
+											<span><a href="#" class="selected">3</a></span>
+											<a href="#" class="glyphicon glyphicon-chevron-right"></a>
+										</div>
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					<input type="button" class="btn-green" value="New Template" />
+					<input type="button" value="Edit Template" />
+					
+					<input type="button" class="btn-red right" value="Delete" />
+				</div>
+
+				<div class="clear"></div>
+
+			</div>
+			
+			<div id="alerts">
+				
+			</div>
+		</div>
+
+		<div id="footer">
+			&copy; 2013 <a href="http://www.ufl.edu/">University of Florida</a> &amp; <a href="http://www.biotech.ufl.edu/">ICBR</a>
+
+			<a href="#" id="alert-icon" class="glyphicon glyphicon-bullhorn"></a>
+		</div>
+	</div>
+
+	<iframe id="login" src="login.html"></iframe>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<div class="box">
+
+	<h2>Check-in Sample</h2>
+
+	<div class="ui-tab-group">
+
+		<ul class="ui-tabs">
+			<li><a href="#samples/checkin">By QR Code</a></li>
+			<li><a href="#samples/checkin/via-search">By Search</a></li>
+			<div class="clear"></div>
+		</ul>
+
+		<div class="ui-tab-content">
+
+			<table>
+				<tr>
+					<td style="padding-right:15px;width:50%;">
+						<h2>Request Information</h2>
+						<p class="wait">Please scan a request QR Code</p>
+
+						<div id="scanned-request-info">
+							<input type="button" class="reset-scan btn-red" value="Re-scan" /><br /><br />
+
+							<strong>Name:</strong> <a href="" class="request-name"></a><br />
+							<strong>Date Submitted:</strong> <span class="request-date-created"></span><br />
+							<strong>Samples:</strong><br />
+							<div class="request-samples"></div>
+							
+						</div>
+					</td>
+					<td>
+						<input type="file" capture="camera" accept="image/*" id="camera-input" name="camera-input">
+						<img id="photo-preview" />
+					</td>
+				</tr>
+			</table>
+			
+			<input type="button" class="checkin-all" value="Check-in Entire Request"> 
+			<input type="button" value="Check-in Specific Samples" class="btn-green checkin-selected right">
+		</div>
+
+		<div class="ui-tab-content checkin-search"></div>
+		
+	</div>
+</div>

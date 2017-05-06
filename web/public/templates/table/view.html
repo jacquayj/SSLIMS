@@ -1,0 +1,43 @@
+
+<h2><%= options.title %></h2>
+
+<div class="table-container">
+	<table class="ui-table">
+		<thead>
+			<tr>
+				<% if ( options.options.checkBoxes ) { %>
+					<th class="chk">
+						<label>
+							<input type="checkbox">
+							<span></span>
+						</label>
+					</th>
+				<% } %>
+
+				<% _.each(options.fields, function(field) {
+					field = _.keys(field)[0];
+					%>
+					<th><%- field %></th>
+				<% }); %>
+			</tr>
+		</thead>
+		<tbody></tbody>
+		<tfoot>
+			<tr>
+				<% 
+				var numCols = options.fields.length;
+				if ( options.options.checkBoxes ) numCols++; 
+				%>
+				<td colspan="<%= numCols %>">
+					<input type="text" class="search" value="<%- state.searchTerm %>" placeholder="filter...">
+
+					<div class="ui-pagination right"></div>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+
+<% _.each(options.buttons, function(btn, index) { %>
+	<input type="button" class="<%= _.isUndefined(btn.class) ? "" : (btn.class + ' ') %>btn-<%= index %> table-view-btn" value="<%- btn.value %>" />
+<% }); %>

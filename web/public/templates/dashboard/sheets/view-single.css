@@ -1,0 +1,31 @@
+#view-sheet-view .sample-sheet {
+	display: block;
+}
+
+#view-sheet-view .ui-tab-content ul {
+	/*margin-left: 20px;*/
+}
+
+.sheet-actions input {
+	margin-bottom: 10px;
+}
+
+#view-sheet-view .download-data {
+	display: block;
+}
+
+#view-sheet-view .download-data select {
+	width: 95%;
+}
+
+.reaction-log-iframe {
+	width: 100%;
+	border: 0;
+	height: 722px;
+}
+
+.reaction-log {
+	  -webkit-overflow-scrolling: touch;
+  overflow: scroll;
+  width: 100%;
+}

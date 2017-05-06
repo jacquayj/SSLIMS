@@ -1,0 +1,9 @@
+.popup-editalerttemplate input[type="text"] {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.popup-editalerttemplate textarea {
+	height: 200px;
+	margin-bottom: 5px;
+}

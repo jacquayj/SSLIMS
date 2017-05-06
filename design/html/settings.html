@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Settings :: SSLIMS</title>
+
+	<link rel="stylesheet" type="text/css" href="css/glyphicons.css">
+	<link rel="stylesheet" type="text/css" href="css/theme.css">
+	<link rel="stylesheet" type="text/css" href="css/dashboard.css">
+
+	<link rel="apple-touch-icon" href="images/touch-icon-ipad.png" />
+
+</head>
+
+<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="js/underscore-min.js"></script>
+<script type="text/javascript" src="js/backbone-min.js"></script>
+<script type="text/javascript" src="js/sslims.lib.js"></script>
+<script type="text/javascript" src="js/jquery.stayInWebApp.min.js"></script>
+
+<script type="text/javascript">
+
+$(function() {
+
+	var sidebar = $("#sidebar");
+	var page = $("#page");
+
+	new UI.TabGroup($(".ui-tab-group"));
+
+	if ( window.location.hash !== "#login" ) {
+		if ( window.location.hash == "#welcome" ) {
+			page.animate({
+				"margin-left": "185px"
+			}, 500);
+		} else {
+			page.css("margin-left", "185px");
+		}
+	
+	}
+
+	$("#expand").click(function() {
+		if ( page.css('margin-left') == "185px" ) {
+			page.animate({
+				"margin-left": "0px"
+			}, 500);
+		} else {
+			page.animate({
+				"margin-left": "185px"
+			}, 500);
+		}
+	});
+
+	$("#logout").click(function() {
+		$("#login").css({
+			"border-right": "solid 10px #3b3a3f"
+		});
+		page.animate({
+			"margin-left": "10px"
+		}, 500, function() {
+			$("#login").animate({
+				left: "0%"
+			}, 1000, function() {
+				document.location = "login.html";
+			});
+		});
+	});
+
+	$(".dismiss-alert").click(function() {
+		$(this).parent().slideUp(500);
+	});
+
+	$.stayInWebApp();
+
+});
+
+</script>
+
+<body>
+
+	<div id="sidebar">
+
+		<a href="index.html">
+			<img src="images/logo-small.png" id="logo" />
+		</a>
+
+		<div id="navigation">
+			<h3>Requests</h3>
+
+			<ul>
+				<li>
+					<a href="index.html">
+						<span class="glyphicon glyphicon-bookmark"></span> Dashboard
+					</a>
+				</li>
+				<li>
+					<a href="request_view.html">
+						<span class="glyphicon glyphicon-th-list"></span> View Requests
+					</a>
+				</li>
+				<li>
+					<a href="request_create.html">
+						<span class="glyphicon glyphicon-plus"></span> Create Request
+					</a>
+				</li>
+			</ul>
+
+			<h3>Workflow</h3>
+			<ul>
+				<li>
+					<a href="sample_checkin.html">
+						<span class="glyphicon glyphicon-qrcode"></span> Check-in Sample
+					</a>
+				</li>
+				<li>
+					<a href="sheet_view.html">
+						<span class="glyphicon glyphicon-th-list"></span> View Sheets
+					</a>
+				</li>
+				<li>
+					<a href="sheet_create.html">
+						<span class="glyphicon glyphicon-flash"></span> Create Sheet
+					</a>
+				</li>
+				<li>
+					<a href="alert_send.html">
+						<span class="glyphicon glyphicon-exclamation-sign"></span> Send Alerts
+					</a>
+				</li>
+			</ul>
+
+
+			<h3>Settings</h3>
+			<ul>
+				<li>
+					<a href="alert_templates.html">
+						<span class="glyphicon glyphicon-envelope"></span> Alert Templates
+					</a>
+				</li>
+				<li>
+					<a href="instrument_settings.html">
+						<span class="glyphicon glyphicon-tasks"></span> Instruments
+					</a>
+				</li>
+				<li>
+					<a href="account_settings.html">
+						<span class="glyphicon glyphicon-cog"></span> Accounts
+					</a>
+				</li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+
+	</div>
+	<div id="page">
+		<div id="header">
+
+			<a href="#">
+				<img src="images/icon-expand.png" id="expand" />
+			</a>
+
+			<input type="text" id="site-search" class="search" placeholder="Search..." />
+
+			<a href="#" class="glyphicon glyphicon-log-out" id="logout" title="Logout"></a>
+
+			<div id="account" class="selected">
+				<a href="settings.html"><span class="glyphicon glyphicon-cog"></span> John Jacquay</a>
+			</div>
+
+			<ul id="bread">
+				<li>/</li>
+				<li><a href="index.html">Dashboard</a></li>
+				<li>/</li>
+				<li><a href="settings.html" class="selected">Settings</a></li>
+			</ul>
+		</div>
+
+		<div id="container">
+			<div id="content">
+				
+				
+
+				<div class="box">
+					<h2>Account Settings</h2>
+					<div class="ui-tab-group">
+
+						<ul class="ui-tabs">
+							<li class="selected"><a href="#">Contact Information</a></li>
+							<li><a href="#">Account Information</a></li>
+							<li><a href="#">Password</a></li>
+							<div class="clear"></div>
+						</ul>
+
+						<div class="ui-tab-content" style="display: block;">
+
+							<form action="" method="post">
+								<table>
+									<tbody>
+									<tr>
+										<td>
+											<label for="first-name">First Name</label>
+											<input type="text" id="first-name" value="John" />
+										</td>
+										<td>
+											<label for="last-name">Last Name</label>
+											<input type="text" id="last-name" value="Jacquay" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="dept">Department</label>
+											<input type="text" id="dept" value="ICBR-CI" />
+										</td>
+										<td>
+											<label for="bldg">Bldg. &amp; Room #</label>
+											<input type="text" id="bldg" value="CGRC #118" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="address">Address</label>
+											<input type="text" id="address" value="2033 Mowry Road" />
+										</td>
+										<td>
+											<label for="city">City</label>
+											<input type="text" id="city" value="Gainesville" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="state">State</label>
+											<select id="state"> 
+												<option value="">Select a State</option> 
+												<option value="AL">Alabama</option> 
+												<option value="AK">Alaska</option> 
+												<option value="AZ">Arizona</option> 
+												<option value="AR">Arkansas</option> 
+												<option value="CA">California</option> 
+												<option value="CO">Colorado</option> 
+												<option value="CT">Connecticut</option> 
+												<option value="DE">Delaware</option> 
+												<option value="DC">District Of Columbia</option> 
+												<option value="FL" selected="selected">Florida</option> 
+												<option value="GA">Georgia</option> 
+												<option value="HI">Hawaii</option> 
+												<option value="ID">Idaho</option> 
+												<option value="IL">Illinois</option> 
+												<option value="IN">Indiana</option> 
+												<option value="IA">Iowa</option> 
+												<option value="KS">Kansas</option> 
+												<option value="KY">Kentucky</option> 
+												<option value="LA">Louisiana</option> 
+												<option value="ME">Maine</option> 
+												<option value="MD">Maryland</option> 
+												<option value="MA">Massachusetts</option> 
+												<option value="MI">Michigan</option> 
+												<option value="MN">Minnesota</option> 
+												<option value="MS">Mississippi</option> 
+												<option value="MO">Missouri</option> 
+												<option value="MT">Montana</option> 
+												<option value="NE">Nebraska</option> 
+												<option value="NV">Nevada</option> 
+												<option value="NH">New Hampshire</option> 
+												<option value="NJ">New Jersey</option> 
+												<option value="NM">New Mexico</option> 
+												<option value="NY">New York</option> 
+												<option value="NC">North Carolina</option> 
+												<option value="ND">North Dakota</option> 
+												<option value="OH">Ohio</option> 
+												<option value="OK">Oklahoma</option> 
+												<option value="OR">Oregon</option> 
+												<option value="PA">Pennsylvania</option> 
+												<option value="RI">Rhode Island</option> 
+												<option value="SC">South Carolina</option> 
+												<option value="SD">South Dakota</option> 
+												<option value="TN">Tennessee</option> 
+												<option value="TX">Texas</option> 
+												<option value="UT">Utah</option> 
+												<option value="VT">Vermont</option> 
+												<option value="VA">Virginia</option> 
+												<option value="WA">Washington</option> 
+												<option value="WV">West Virginia</option> 
+												<option value="WI">Wisconsin</option> 
+												<option value="WY">Wyoming</option>
+											</select>
+										</td>
+										<td>
+											<label for="zip">Zip</label>
+											<input type="text" id="zip" value="32610" />
+										</td>
+									</tr>
+								</tbody>
+
+								</table>
+								
+								
+								<input type="button" class="btn-green right" id="add-sample" value="Save">
+
+								<div class="clear"></div>
+							</form>
+						</div>
+
+						<div class="ui-tab-content">
+							<form action="" method="post">
+								<table>
+									<tbody>
+									<tr>
+										<td>
+											<label for="username">Username</label>
+											<input type="text" id="username" value="jacquayj" />
+										</td>
+										<td>
+											<label for="email">Email</label>
+											<input type="text" id="email" value="jacquayj@ufl.edu" />
+										</td>
+									</tr>
+								</tbody>
+
+								</table>
+								
+								
+								<input type="button" class="btn-green right" id="add-sample" value="Save">
+
+								<div class="clear"></div>
+							</form>
+						</div>
+
+						<div class="ui-tab-content">
+							<form action="" method="post">
+								<table>
+									<tbody>
+									<tr>
+										<td>
+											<label for="password">Password</label>
+											<input type="password" id="password" />
+										</td>
+										<td>
+											<label for="password-again">Password Again</label>
+											<input type="password" id="password-again" />
+										</td>
+									</tr>
+								</tbody>
+
+								</table>
+								
+								
+								<input type="button" class="btn-green right" id="add-sample" value="Save Settings">
+
+								<div class="clear"></div>
+							</form>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="box">
+					<h2>Application Settings</h2>
+					
+					<form>
+						<table>
+							<tr>
+								<td>
+									<label>Auto Collapse Side Navigation</label>
+									<select>
+										<option>Yes</option>
+										<option>No</option>
+									</select>
+								</td>
+								<td>
+									<label>Remember Login</label>
+									<select>
+										<option>Yes</option>
+										<option>No</option>
+									</select>
+								</td>
+							</tr>
+						</table>
+						<input type="button" class="btn-green right" value="Save Settings">
+					</form>
+
+				</div>
+				<div class="clear"></div>
+
+			</div>
+			
+		</div>
+
+		<div id="footer">
+			&copy; 2013 <a href="http://www.ufl.edu/">University of Florida</a> &amp; <a href="http://www.biotech.ufl.edu/">ICBR</a>
+
+			<a href="#" id="alert-icon" class="glyphicon glyphicon-bullhorn"></a>
+		</div>
+	</div>
+
+	<iframe id="login" src="login.html"></iframe>
+
+</body>
+</html>

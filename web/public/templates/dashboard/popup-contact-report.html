@@ -1,0 +1,53 @@
+<div class="ui-popup-wrapper popup-report">
+	<div class="ui-popup-vcenter">
+		<div class="ui-popup popup-reset">
+			<a href="javascript:void(0);" class="ui-popup-close glyphicon glyphicon-remove"></a>
+			
+			<h2>Contact Us</h2>
+
+			<div id="contact-report-form">
+				<p>Do you have any questions, feedback, or need help with something? Or maybe you have a bug to report. Fill out the form below, and we'll get back to you ASAP.</p>
+
+				<form>
+					<label>Reason:</label>
+					<select id="reason-field">
+						<option>General Question</option>
+						<option>Suggestion</option>
+						<option>Bug Report</option>
+						<option>Feedback</option>
+						<option>Other</option>
+					</select>
+					<br />
+
+					<div class="left" style="width:48%;padding-right:10px;">
+						<label>Importance:</label>
+						<select id="importance-field">
+							<option>Low</option>
+							<option selected>Normal</option>
+							<option>High</option>
+							<option>Urgent</option>
+							<!-- <option>OMGWTFBBQ!?$%^#</option> -->
+						</select>
+					</div>
+					<div class="left" style="width:48%;">
+						<label>Response Preference:</label>
+						<select id="response-field">
+							<option>Email</option>
+							<option>Phone (Please provide number)</option>
+							<% if ( SSLIMS.user.get('user_type') != 'customer' ) { %>
+								<option>Visit the lab</option>
+							<% } %>
+						</select>
+					</div>
+					<div class="clear"></div>
+
+					<label>Message:</label>
+					<textarea id="message-field"></textarea>
+					<br />
+
+					<input type="submit" class="btn btn-green" value="Send Message" />
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

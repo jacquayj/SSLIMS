@@ -1,0 +1,124 @@
+<div id="sidebar">
+
+	<a href="#dashboard">
+		<img src="images/logo-small.png" id="logo" />
+	</a>
+
+	<div id="navigation">
+
+		<% if ( user.get('user_type') == 'customer' ) { %>
+			<h3>View</h3>
+		<% } else { %>
+			<h3>Requests</h3>
+		<% } %>
+		<ul>
+			<% if ( user.get('user_type') == 'customer' ) { %>
+				<li>
+					<a href="#dashboard">
+						<span class="glyphicon glyphicon-th-list"></span> My Requests
+					</a>
+				</li>
+				<li>
+					<a href="#settings/contact">
+						<span class="glyphicon glyphicon-cog"></span> Account Settings
+					</a>
+				</li>
+			<% } else { %>
+				<li>
+					<a href="#dashboard">
+						<span class="glyphicon glyphicon-th-large"></span> Dashboard
+					</a>
+				</li>
+				<li>
+					<a href="#requests">
+						<span class="glyphicon glyphicon-th-list"></span> View Requests
+					</a>
+				</li>
+			<% } %>
+			
+		</ul>
+
+		<% if ( user.get('user_type') == 'admin' || user.get('user_type') == 'staff' ) { %>
+			<h3>Workflow</h3>
+
+			<ul>
+				<li>
+					<a href="#samples/checkin">
+						<span class="glyphicon glyphicon-qrcode"></span> Check-in Sample
+					</a>
+				</li>
+				<li>
+					<a href="#sheets">
+						<span class="glyphicon glyphicon-th-list"></span> View Sheets
+					</a>
+				</li>
+				<li>
+					<a href="#sheets/create">
+						<span class="glyphicon glyphicon-flash"></span> Create Sheet
+					</a>
+				</li>
+				<li>
+					<a href="#alerts/send">
+						<span class="glyphicon glyphicon-exclamation-sign"></span> Send Alerts
+					</a>
+				</li>
+				
+			</ul>
+		<% } %>
+
+		<% if ( user.get('user_type') == 'admin' ) { %>
+			<h3>Settings</h3>
+
+			<ul>
+				<li>
+					<a href="#alerts">
+						<span class="glyphicon glyphicon-envelope"></span> Alert Templates
+					</a>
+				</li>
+				<li>
+					<a href="#config">
+						<span class="glyphicon glyphicon-tasks"></span> Configure
+					</a>
+				</li>
+				<li>
+					<a href="#users">
+						<span class="glyphicon glyphicon-cog"></span> Accounts
+					</a>
+				</li>
+			</ul>
+		<% } %>
+		<div class="clear"></div>
+	</div>
+</div>
+
+<div id="page">
+	<div id="header">
+		<img src="images/icon-expand.png" id="expand" />
+
+		<form id="site-search-form">
+			<input type="text" id="site-search" class="search" placeholder="Search..." />
+		</form>
+
+		<div class="glyphicon glyphicon-log-out" id="logout" title="Logout"></div>
+
+		<div id="logo-section">
+			<a href="http://www.biotech.ufl.edu/">
+				<img src="images/icbr-logo.png" />
+			</a>
+		</div>
+
+		<ul id="bread"></ul>
+	</div>
+
+	<div id="container">
+		<div id="content"></div>
+		
+	</div>
+
+	<div id="footer">
+		&copy; <span class="footer-year"></span> <a href="http://example.com">University of Something</a> <a href="#">My Org</a>
+
+		<a href="javascript:void(0);" id="contact-icon" class="glyphicon glyphicon-envelope"></a>
+		<a href="#dashboard/alerts" id="alert-icon" class="glyphicon glyphicon-bullhorn"></a>
+	</div>
+</div>

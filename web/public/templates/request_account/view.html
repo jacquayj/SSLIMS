@@ -1,0 +1,64 @@
+<div id="container">
+	<div id="form-container">
+		
+
+		<div id="inner">
+			<div id="arrow-left"></div>
+			
+			<h1>Request Account</h1>
+			
+			<p>Hello <strong><%- shibUser.firstName %></strong>,</p>
+			
+			<p>It appears you have authenticated with a GatorLink username and password, however we do not have an account for you. In order to use the SSLIMS application you must have permission from the core manager.</p>
+			
+			<p>Please speak with your core manager to request an account, or fill out the form below and we'll forward the request on your behalf.</p>
+
+			<div id="thankyou">
+				<h2>Thank You!</h2>
+				<p>We have forwarded your request to the core manager. You can refresh this page, or click the button below to check if your account has been activated.</p>
+				<input type="button" id="check" value="Check Activation" />
+			</div>
+
+			<div id="account-request-form">
+				<table>
+					<tr>
+						<td>
+							<label>First Name</label>
+							<input type="text" id="first-name" disabled value="<%- shibUser.firstName %>" />
+						</td>
+						<td>
+							<label>Last Name</label>
+							<input type="text" id="last-name" disabled value="<%- shibUser.lastName %>" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="padding-left: 0;">
+							<label>Email</label>
+							<input type="text" id="email" disabled value="<%- shibUser.email %>" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="padding-left: 0;">
+							<label>Message</label>
+							<textarea id="message" placeholder="Optional"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="submit" id="submit" value="Request Account" /></td>
+					</tr>
+				</table>
+			</div>
+			
+			
+		</div>
+		
+	</div>
+
+	<img src="images/logo.png" id="logo" />
+	
+	<div class="clear"></div>
+</div>
+
+<div id="footer">
+	&copy; <%= new Date().getFullYear() %> <a href="http://www.ufl.edu/">University of Florida</a> <a href="http://www.biotech.ufl.edu/">ICBR</a>
+</div>

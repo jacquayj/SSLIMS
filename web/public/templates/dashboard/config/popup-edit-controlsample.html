@@ -1,0 +1,66 @@
+<div class="ui-popup-wrapper">
+	<div class="ui-popup-vcenter">
+		<div class="ui-popup popup-reset">
+			<a href="javascript:void(0);" class="ui-popup-close glyphicon glyphicon-remove"></a>
+			
+			<form>
+				<h2>Edit Control Sample</h2>
+
+				<table>
+					<tbody>
+					<tr>
+						<td>
+							<label>Name</label>
+							<label>
+								<input type="text" id="name" value="<%- model.get('name') %>">
+							</label>
+						</td>
+						<td>
+							<label>Conc. ng/ul</label>
+							<label>
+								<input type="text" id="concentration" value="<%- model.get('concentration') %>">
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>Ug of DNA</label>
+							<label>
+								<input type="text" id="dna_ug" value="<%- model.get('dna_ug') %>">
+							</label>
+						</td>
+						<td>
+							<label>DNA Type</label>
+							<label>
+								<input type="text" id="dna_type" value="<%- model.get('dna_type') %>">
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>Size bp</label>
+							<label>
+								<input type="text" id="dna_bp_size" value="<%- model.get('dna_bp_size') %>">
+							</label>
+						</td>
+						<td>
+							<label>Primer</label>
+							<label>
+								<select id="primer_id">
+									<% primers.each(function(primer) { %>
+										<option value="<%= primer.get('id') %>"<%= (model.get('primer_id') == primer.get('id')) ? ' selected' : '' %>><%- primer.get('name') %></option>
+									<% }); %>
+								</select>
+							</label>
+						</td>
+					</tr>
+					</tbody></table>
+
+					<input type="submit" value="Save" class="btn-green" id="save-btn">
+					<input type="button" value="Cancel" class="btn-red right" id="cancel-btn">
+				
+
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,19 @@
+<h2>Search results for "<%- query %>"</h2>
+
+<div id="requests" class="box"></div>
+<div id="samples" class="box"></div>
+
+<div class="clear"></div>
+
+<% if ( SSLIMS.user.get('user_type') != 'customer' ) { %>
+
+	<div id="sheets" class="box"></div>
+	<div id="users" class="box"></div>
+
+	<div class="clear"></div>
+
+	<div id="instruments" class="box"></div>
+
+	<div class="clear"></div>
+
+<% } %>
